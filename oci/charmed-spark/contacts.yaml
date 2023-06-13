@@ -1,0 +1,7 @@
+notify:
+  emails:
+    - data-platform@lists.launchpad.net
+    - enrico.deusebio@canonical.com
+    - rob.gibbon@canonical.com
+  mattermost-channels:
+    - 893egxjx1trqjeuapdgpjeoz9a

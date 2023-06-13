@@ -1,0 +1,38 @@
+version: 1
+
+application: Charmed Spark
+is_chiselled: false
+description: |
+  ROCK for Spark on Kubernetes. It provides a direct port for using Spark, bundling in one image
+  Spark binaries + some extra tooling ([spark8t](https://github.com/canonical/spark-k8s-toolkit-py) python package) 
+  for setting up, configuring and managing Spark Jobs seamlessly.
+  
+  The Charmed Spark Rock image can be used in all components building the Canonical Charmed Spark 
+  solution:
+    * Image for starting pod from which performing admin tasks in kubernetes
+    * Base image for running driver pods on kubernetes
+    * Base image for running executor pods on kubernetes
+    * Base image for running [Spark History Server](https://charmhub.io/spark-history-server-k8s) using Charmed Operators
+  
+  For more information on how to use the image, please refer to [this](https://github.com/canonical/charmed-spark-rock#use-spark-from-within-a-container)
+  
+  The Charmed Spark Rock image is fabricated to be easily run by Spark directly. However, since ROCKs
+  images rely on Pebble services as entrypoint, Spark needs to be configured to be able to 
+  interface correctly with Pebble. To do so, just create a podTemplate.yaml:
+  
+  ```yaml
+  apiVersion: v1
+  kind: Pod
+  spec:
+    containers:
+    - name: spark
+      args: ["--args", "spark-entrypoint"]  
+  ```
+  
+  and provide this file as argument when running the spark jobs, via the following configuration options:
+  
+  ```
+  spark.kubernetes.driver.podTemplateFile=/etc/spark/conf/podTemplate.yaml
+  spark.kubernetes.executor.podTemplateFile=/etc/spark/conf/podTemplate.yaml
+  ```
+  
