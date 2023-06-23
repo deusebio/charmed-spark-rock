@@ -2,7 +2,7 @@
 
 # .PHONY defines parts of the makefile that are not dependant on any specific file
 # This is most often used to store functions
-.PHONY: help clean build deploy tests
+.PHONY: help clean build import tests
 
 # ======================
 # EXTERNAL VARIABLES
