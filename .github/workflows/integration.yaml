@@ -45,11 +45,11 @@ jobs:
           rmdir charmed-spark
 
           # Import artifact into docker with new tag
-          sudo make import TARGET=docker REPOSITORY=ghcr.io/canonical/ PREFIX=test- \
+          sudo make import TARGET=docker REPOSITORY=ghcr.io/deusebio/ PREFIX=test- \
             -o ${{ steps.artifact.outputs.name }} 
 
           # Import artifact into microk8s to be used in integration tests
-          sudo make import TARGET=microk8s PREFIX=test- REPOSITORY=ghcr.io/canonical/ \
+          sudo make import TARGET=microk8s PREFIX=test- REPOSITORY=ghcr.io/deusebio/ \
             -o $(find .make_cache -name "*.tag")
           
           sg microk8s -c "make tests"
