@@ -68,16 +68,16 @@ jobs:
           mv charmed-spark/${{ steps.artifact.outputs.name }} .
           rmdir charmed-spark
           
-          REPOSITORY="ghcr.io/canonical/"
-          
-          # Import artifact into docker with new tag
-          sudo make import TARGET=docker REPOSITORY=${REPOSITORY} \
-            -o ${{ steps.artifact.outputs.name }} 
-
+          REPOSITORY="ghcr.io/deusebio/"
           RISK=${{ steps.branch_metadata.outputs.risk }}
           TRACK=${{ steps.branch_metadata.outputs.track }}
           if [ ! -z "$RISK" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
-          IMAGE_NAME="${REPOSITORY}charmed-spark"
-          echo "Publishing ${IMAGE_NAME}:${TAG}"
           
+          # Import artifact into docker with new tag
+          sudo make import TARGET=docker REPOSITORY=${REPOSITORY} TAG=${TAG}\
+            -o ${{ steps.artifact.outputs.name }} 
+
+          IMAGE_NAME="${REPOSITORY}charmed-spark"
+          
+          echo "Publishing ${IMAGE_NAME}:${TAG}"          
           docker push ${IMAGE_NAME}:${TAG}
