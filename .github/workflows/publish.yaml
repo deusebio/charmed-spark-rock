@@ -68,7 +68,9 @@ jobs:
           sudo make import TARGET=docker REPOSITORY=${REPOSITORY} \
             -o ${{ steps.artifact.outputs.name }} 
 
-          TAG=${{ steps.branch_metadata.outputs.track }}_${{ steps.branch_metadata.outputs.risk }}
+          RISK=${{ steps.branch_metadata.outputs.risk }}
+          TRACK=${{ steps.branch_metadata.outputs.track }}
+          if [ ! -z "$RISK" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
           IMAGE_NAME="${REPOSITORY}charmed-spark"
           echo "Publishing ${IMAGE_NAME}:${TAG}"
           
