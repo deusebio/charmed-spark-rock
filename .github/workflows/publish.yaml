@@ -81,7 +81,7 @@ jobs:
           REPOSITORY="ghcr.io/canonical/"
           RISK=${{ needs.release_checks.outputs.risk }}
           TRACK=${{ needs.release_checks.outputs.track }}
-          if [ ! -z "$RISK" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
+          if [ ! -z "$RISK" ] && [ "${RISK}" != "no-risk" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
           
           # Import artifact into docker with new tag
           sudo make import TARGET=docker REPOSITORY=${REPOSITORY} TAG=${TAG}\
