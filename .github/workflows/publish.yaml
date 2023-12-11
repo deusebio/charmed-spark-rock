@@ -55,12 +55,12 @@ jobs:
         run: |          
           sudo snap install yq
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ secrets.GHCR_USER }}
-          password: ${{ secrets.GHCR_TOKEN }}
+      # - name: Login to GitHub Container Registry
+      #   uses: docker/login-action@v2
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ secrets.GHCR_USER }}
+      #     password: ${{ secrets.GHCR_TOKEN }}
 
       - name: Get Artifact Name
         id: artifact
@@ -92,7 +92,7 @@ jobs:
             -o ${{ steps.artifact.outputs.name }} 
 
           echo "Publishing ${IMAGE_NAME}:${TAG}"          
-          docker push ${IMAGE_NAME}:${TAG}
+          # docker push ${IMAGE_NAME}:${TAG}
           
           if [[ "$RISK" == "edge" ]]; then           
             TAG="${{ needs.release_checks.outputs.version }}-${{ needs.release_checks.outputs.base }}_edge"
@@ -101,7 +101,7 @@ jobs:
               -o ${{ steps.artifact.outputs.name }} 
             
             echo "Publishing ${IMAGE_NAME}:${TAG}"          
-            docker push ${IMAGE_NAME}:${TAG}
+            # docker push ${IMAGE_NAME}:${TAG}
           fi
 
       - name: Publish JupyterLab Image to Channel
@@ -119,7 +119,7 @@ jobs:
             -o ${{ steps.artifact.outputs.name }} 
 
           echo "Publishing ${IMAGE_NAME}:${TAG}"          
-          docker push ${IMAGE_NAME}:${TAG}
+          # docker push ${IMAGE_NAME}:${TAG}
           
           if [[ "$RISK" == "edge" ]]; then           
             TAG="${{ needs.release_checks.outputs.version }}-${{ needs.release_checks.outputs.base }}_edge"
@@ -128,7 +128,7 @@ jobs:
               -o ${{ steps.artifact.outputs.name }} 
             
             echo "Publishing ${IMAGE_NAME}:${TAG}"          
-            docker push ${IMAGE_NAME}:${TAG}
+            # docker push ${IMAGE_NAME}:${TAG}
           fi
 
 
