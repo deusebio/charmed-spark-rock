@@ -92,7 +92,7 @@ jobs:
           # Unpack artifact
           mv charmed-spark/${{ steps.artifact.outputs.base_artifact_name }} .
           
-          REPOSITORY="ghcr.io/canonical/"
+          REPOSITORY="ghcr.io/deusebio/"
           RISK=${{ needs.release_checks.outputs.risk }}
           TRACK=${{ needs.release_checks.outputs.track }}
           if [ ! -z "$RISK" ] && [ "${RISK}" != "no-risk" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
@@ -126,7 +126,7 @@ jobs:
           # Unpack artifact
           mv charmed-spark/${{ steps.artifact.outputs.jupyter_artifact_name }} .
 
-          REPOSITORY="ghcr.io/canonical/"
+          REPOSITORY="ghcr.io/deusebio/"
           RISK=${{ needs.release_checks.outputs.risk }}
           TRACK=${{ needs.release_checks.outputs.track }}
           if [ ! -z "$RISK" ] && [ "${RISK}" != "no-risk" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
@@ -164,7 +164,7 @@ jobs:
           mv charmed-spark/${{ steps.artifact.outputs.kyuubi_artifact_name }} .
           rmdir charmed-spark
 
-          REPOSITORY="ghcr.io/canonical/"
+          REPOSITORY="ghcr.io/deusebio/"
           RISK=${{ needs.release_checks.outputs.risk }}
           TRACK=${{ needs.release_checks.outputs.track }}
           if [ ! -z "$RISK" ] && [ "${RISK}" != "no-risk" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
@@ -208,7 +208,7 @@ jobs:
           mv charmed-spark-gpu/${{ steps.artifact.outputs.gpu_artifact_name }} .
           rmdir charmed-spark-gpu
 
-          REPOSITORY="ghcr.io/canonical/"
+          REPOSITORY="ghcr.io/deusebio/"
           RISK=${{ needs.release_checks.outputs.risk }}
           TRACK=${{ needs.release_checks.outputs.track }}
           if [ ! -z "$RISK" ] && [ "${RISK}" != "no-risk" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
